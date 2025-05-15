@@ -1,0 +1,182 @@
+<core:FragmentDefinition xmlns:tnt="sap.tnt" xmlns:cards="sap.f.cards" xmlns:form="sap.ui.layout.form" xmlns:m="sap.m" xmlns:core="sap.ui.core"     xmlns="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:c="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" 
+>   
+<m:IconTabBar id="idIconTabBarNoIcons">
+<m:items>
+        <m:IconTabFilter  text="Customer Information" key="customerInfo">
+        <m:VBox class="sapUiSmallMargin">
+
+        <f:SimpleForm id="idCustomInfoForm"
+                editable="false"
+            layout="ResponsiveGridLayout"
+            title="Monthly Usage and Power Factor Report (PF)"
+            columnsM="2"
+            columnsL="3"
+            columnsXL="4">
+            <f:toolbar>
+            <tnt:ToolHeader >
+            <m:Title text="Monthly Usage and Power Factor Report (PF)" wrapping="false" id="idsimple"></m:Title>
+             <m:ToolbarSpacer />
+             <m:Text text="Date Report Generated"></m:Text>
+            </tnt:ToolHeader>
+            </f:toolbar>
+            <f:content>
+                <core:Title text="" />
+                <m:Label text="Customer Name"></m:Label>
+                <m:Text id="idCustNM" text=""></m:Text>
+                <m:Label text="Customer Address"></m:Label>
+                <m:Text id="idCustAdd" text=""></m:Text>
+                <m:Label text="Customer Billing Class / Rate Category"></m:Label>
+                <m:Text id="idCustBillRate" text=""></m:Text>
+                <core:Title text="" />
+                <m:Label text="Account Number"></m:Label>
+                <m:Text id="idAccNo" text=""></m:Text>
+                <m:Label text="Device Location Number"></m:Label>
+                <m:Text id="idDevLocNo" text=""></m:Text>
+                <m:Label text=""></m:Label>
+                <m:Text id="idSpace" text=""></m:Text>
+                <core:Title text="" />
+                <m:Label text="Meter Number"></m:Label>
+                <m:Text id="idMeterNo" text=""></m:Text>
+                <m:Label text="Meter Type"></m:Label>
+                <m:Text id="idMeterType" text=""></m:Text>
+                <m:Label text="Meter Class"></m:Label>
+                <m:Text id="idMeterClass" text=""></m:Text>
+            </f:content>
+        </f:SimpleForm> 
+        </m:VBox>        
+        </m:IconTabFilter>
+        <m:IconTabFilter  text="Usage Information" key="usageInfo">
+        <Table id="tblUsageInfo"
+                ariaLabelledBy="title"
+                rows="{EngModel>/}"
+                enableColumnFreeze="true">
+                <extension>
+                    <m:OverflowToolbar style="Clear">
+                        <m:Title id="title" text="Line Items"/>
+                    </m:OverflowToolbar>
+                </extension>
+                <columns>
+                    <Column
+                        width="11rem">
+                        <m:Label text="Month Period" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text text="{EngModel>Date}"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem">
+                        <m:Label text="Consumption(kWh)" textAlign="Center" width="100%"/>
+                        <template>
+                            <m:Text text="{EngModel>ConsumptionKWH}"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="3,1">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Meter Peak" textAlign="Center" width="100%"/>
+                            <m:Label text="kW" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterPeakKW}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="2,1">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Meter Peak" textAlign="Center" width="100%"/>
+                            <m:Label text="kVA" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterPeakKVA}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="3">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Meter Peak" textAlign="Center" width="100%"/>
+                            <m:Label text="PF" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterPeakPF}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="3,1">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Transformer Peak" textAlign="Center" width="100%"/>
+                            <m:Label text="kW" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterTransformerKW}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="2,1">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Transformer Peak" textAlign="Center" width="100%"/>
+                            <m:Label text="kVA" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterTransformerKVA}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="3">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Transformer Peak" textAlign="Center" width="100%"/>
+                            <m:Label text="PF" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterTransformerPF}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="3,1">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Meter Worst PF" textAlign="Center" width="100%"/>
+                            <m:Label text="kW" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterWorstKW}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="2,1">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Meter Worst PF" textAlign="Center" width="100%"/>
+                            <m:Label text="kVA" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterWorstKVA}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column
+                        width="11rem"
+                        headerSpan="3">
+                        <multiLabels>
+                            <m:Label text="Individual Meter @ Meter Worst PF" textAlign="Center" width="100%"/>
+                            <m:Label text="PF" textAlign="Center" width="100%"/>
+                        </multiLabels>
+                        <template>
+                            <m:Text text="{EngModel>MeterWorstPF}" wrapping="false"/>
+                        </template>
+                    </Column>
+                </columns>
+        </Table>
+        </m:IconTabFilter>
+        </m:items>
+    </m:IconTabBar>      
+</core:FragmentDefinition>
