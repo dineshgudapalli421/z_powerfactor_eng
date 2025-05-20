@@ -21,31 +21,31 @@
             <tnt:ToolHeader >
             <m:Title text="Monthly Usage and Power Factor Report (PF)" wrapping="false" id="idsimple"></m:Title>
              <m:ToolbarSpacer />
-             <m:Text text="Date Report Generated"></m:Text>
+             <m:Label id="idDateReport"></m:Label>
             </tnt:ToolHeader>
             </f:toolbar>
             <f:content>
                 <core:Title text="" />
                 <m:Label text="Customer Name"></m:Label>
-                <m:Text id="idCustNM" text=""></m:Text>
+                <m:Text id="idCustNM" text="{/CustomerName}"></m:Text>
                 <m:Label text="Customer Address"></m:Label>
-                <m:Text id="idCustAdd" text=""></m:Text>
+                <m:Text id="idCustAdd" text="{/CustomerAddress}"></m:Text>
                 <m:Label text="Customer Billing Class / Rate Category"></m:Label>
-                <m:Text id="idCustBillRate" text=""></m:Text>
+                <m:Text id="idCustBillRate" text="{/BillingClassRateCat}"></m:Text>
                 <core:Title text="" />
                 <m:Label text="Account Number"></m:Label>
-                <m:Text id="idAccNo" text=""></m:Text>
+                <m:Text id="idAccNo" text="{/AccountNo}"></m:Text>
                 <m:Label text="Device Location Number"></m:Label>
-                <m:Text id="idDevLocNo" text=""></m:Text>
+                <m:Text id="idDevLocNo" text="{/DeviceLocation}"></m:Text>
                 <m:Label text=""></m:Label>
                 <m:Text id="idSpace" text=""></m:Text>
                 <core:Title text="" />
                 <m:Label text="Meter Number"></m:Label>
-                <m:Text id="idMeterNo" text=""></m:Text>
+                <m:Text id="idMeterNo" text="{/MeterNo}"></m:Text>
                 <m:Label text="Meter Type"></m:Label>
-                <m:Text id="idMeterType" text=""></m:Text>
+                <m:Text id="idMeterType" text="{/MeterType}"></m:Text>
                 <m:Label text="Meter Class"></m:Label>
-                <m:Text id="idMeterClass" text=""></m:Text>
+                <m:Text id="idMeterClass" text="{/MeterClass}"></m:Text>
             </f:content>
         </f:SimpleForm> 
         </m:VBox>        
@@ -65,7 +65,7 @@
                         width="11rem">
                         <m:Label text="Month Period" textAlign="Center" width="100%"/>
                         <template>
-                            <m:Text text="{EngModel>Date}"/>
+                            <m:Text text="{EngModel>MonthPeriod}"/>
                         </template>
                     </Column>
                     <Column

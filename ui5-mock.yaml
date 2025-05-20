@@ -4,16 +4,23 @@ specVersion: "3.1"
 metadata:
   name: com.sap.lh.mr.zpowerfactoreng
 type: application
-framework:
-  name: SAPUI5
-  version: 1.120.0
-  libraries:
-    - name: sap.m
-    - name: sap.ui.core
-    - name: sap.ushell
-    - name: themelib_sap_horizon
 server:
   customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: true # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+        backend:
+          - url: https://sapwdv.aws.londonhydro.cloud:44301/
+            client: '200'
+            authenticationType: basic
+            destination: https://sapwdv.aws.londonhydro.cloud:44301/, client 200
+            path: /sap
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -25,16 +32,6 @@ server:
       configuration:
         component: com.sap.lh.mr.zpowerfactoreng
         ui5Theme: sap_horizon
-    - name: fiori-tools-proxy
-      afterMiddleware: compression
-      configuration:
-        ignoreCertError: true # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
-        backend:
-          - url: https://sapwdv.aws.londonhydro.cloud:44301/
-            client: '200'
-            authenticationType: basic
-            destination: https://sapwdv.aws.londonhydro.cloud:44301/, client 200
-            path: /sap
     - name: sap-fe-mockserver
       beforeMiddleware: csp
       configuration:

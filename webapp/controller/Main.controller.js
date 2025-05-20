@@ -15,10 +15,16 @@ sap.ui.define([
             oView.setModel(new JSONModel({
                 rowMode: "Fixed"
             }), "ui");
+            const oLabel = this.getView().byId("idDateReport");
+            const today = new Date();
+            const oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+                style: "long"
+            });
+            const formattedDate = oDateFormat.format(today);
+            oLabel.setText(formattedDate);
         },
 
         onSearch: function () {
-            debugger;
             const oView = this.getView();
             var aFilter = [];
             var idEquipment = this.getView().byId("idEquipment").getValue();
@@ -55,18 +61,26 @@ sap.ui.define([
                 text: "Please wait..."
             });
             oBusyDialog.open();
-            //var oTable = this.getView().byId("tblPowerFactor");
-            oModel.read("/", {
+            oModel.read("/PowerFactorSet", {
                 filters: aFilter,
                 success: function (response) {
-                    debugger;
                     oBusyDialog.close();
-                    //oJsonModel.setData(response.results);
-                    oJsonModel.setData(response.results);
-                    oView.byId("tblUsageInfo").setModel(oJsonModel, "EngModel");
+                    var oModelForm = new sap.ui.model.json.JSONModel(response.results[0]);
+
+                    if (response.results.length > 0) {
+                        oJsonModel.setData(response.results);
+                        oView.byId("idCustomInfoForm").setModel(oModelForm);
+                        oView.byId("tblUsageInfo").setModel(oJsonModel, "EngModel");
+                    }
+                    else if (response.results.length === 0) {
+                        oJsonModel.setData(response.results);
+                        oView.byId("idCustomInfoForm").setModel(oModelForm);
+                        oView.byId("tblUsageInfo").setModel(oJsonModel, "EngModel");
+                        return MessageBox.error("There are no records..");
+                    }
+
                 },
                 error: (oError) => {
-                    debugger;
                     oBusyDialog.close();
                     console.error("Error:", oError);
                 }
