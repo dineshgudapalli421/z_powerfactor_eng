@@ -71,6 +71,9 @@ sap.ui.define([
                         oJsonModel.setData(response.results);
                         oView.byId("idCustomInfoForm").setModel(oModelForm);
                         oView.byId("tblUsageInfo").setModel(oJsonModel, "EngModel");
+                        if (response.results[0].Message !== "") {
+                            return MessageBox.error(response.results[0].Message);
+                        }
                     }
                     else if (response.results.length === 0) {
                         oJsonModel.setData(response.results);
